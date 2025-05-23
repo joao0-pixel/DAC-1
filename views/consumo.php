@@ -29,7 +29,7 @@ $equipments = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <input type="date" id="date" name="date" required><br>
 
     <label for="kwh">Consumo (kWh):</label><br>
-    <input type="number" id="kwh" name="kwh" step="0.01" required><br>
+    <input type="number" id="kwh" name="kwh" required><br>
 
     <label for="observations">Observações:</label><br>
     <textarea id="observations" name="observations"></textarea><br><br>
