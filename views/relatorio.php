@@ -2,10 +2,10 @@
 require_once '../db/db.php';
 
 $stmt = $pdo->query("
-    SELECT e.name AS equipment_name, SUM(ec.kwh) AS total_kwh
-    FROM energy_consumption ec
-    JOIN equipment e ON ec.equipment_id = e.id
-    GROUP BY e.name
+    SELECT e.nome AS equipmento_nome, SUM(ec.kwh) AS total_kwh
+    FROM energy_consumo ec
+    JOIN equipmento e ON ec.equipmento_id = e.id
+    GROUP BY e.nome
     ORDER BY total_kwh DESC
 ");
 $report = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -27,7 +27,7 @@ $report = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php else: ?>
             <?php foreach ($report as $item): ?>
                 <tr>
-                    <td><?= htmlspecialchars($item['equipment_name']) ?></td>
+                    <td><?= htmlspecialchars($item['equipmento_nome']) ?></td>
                     <td><?= htmlspecialchars($item['total_kwh']) ?></td>
                 </tr>
             <?php endforeach; ?>

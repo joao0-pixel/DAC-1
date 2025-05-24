@@ -1,7 +1,7 @@
 <?php
 require_once '../db/db.php';
 
-$stmt = $pdo->query("SELECT * FROM equipment");
+$stmt = $pdo->query("SELECT * FROM equipmento");
 $equipments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -26,11 +26,11 @@ $equipments = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php foreach ($equipments as $equipment): ?>
                 <tr>
                     <td><?= htmlspecialchars($equipment['id']) ?></td>
-                    <td><?= htmlspecialchars($equipment['name']) ?></td>
-                    <td><?= htmlspecialchars($equipment['type']) ?></td>
-                    <td><?= htmlspecialchars($equipment['location']) ?></td>
+                    <td><?= htmlspecialchars($equipment['nome']) ?></td>
+                    <td><?= htmlspecialchars($equipment['tipo']) ?></td>
+                    <td><?= htmlspecialchars($equipment['localizacao']) ?></td>
                     <td><?= htmlspecialchars($equipment['power_watts']) ?></td>
-                    <td><?= htmlspecialchars($equipment['responsible']) ?></td>
+                    <td><?= htmlspecialchars($equipment['responsabilidade']) ?></td>
                 </tr>
             <?php endforeach; ?>
         <?php endif; ?>

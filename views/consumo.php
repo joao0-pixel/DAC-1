@@ -2,37 +2,30 @@
 require_once '../db/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $equipment_id = $_POST['equipment_id'];
-    $date = $_POST['date'];
+    $equipmento_id = $_POST['equipmento_id'];
+    $data = $_POST['data'];
     $kwh = $_POST['kwh'];
-    $observations = $_POST['observations'];
+    $observacoes = $_POST['observacoes'];
 
-    $stmt = $pdo->prepare("INSERT INTO energy_consumption (equipment_id, date, kwh, observations) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$equipment_id, $date, $kwh, $observations]);
+    $stmt = $pdo->prepare("INSERT INTO energy_consumo (equipmento_id, data, kwh, observacoes) VALUES (?, ?, ?, ?)");
+    $stmt->execute([$equipmento_id, $data, $kwh, $observacoes]);
     echo "Consumo registrado com sucesso!";
 }
-
-$stmt = $pdo->query("SELECT id, name FROM equipment");
-$equipments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <form method="POST" action="">
     <h2>Registrar Consumo Mensal</h2>
-    <label for="equipment_id">Equipamento:</label><br>
-    <select id="equipment_id" name="equipment_id" required>
-        <?php foreach ($equipments as $equipment): ?>
-            <option value="<?= $equipment['id'] ?>"><?= htmlspecialchars($equipment['name']) ?></option>
-        <?php endforeach; ?>
-    </select><br>
+    <label for="equipmento_id">Equipamento:</label><br>
+    <input type="text" id="equipmento_id" name="equipmento_id" required><br>
 
-    <label for="date">Data:</label><br>
-    <input type="date" id="date" name="date" required><br>
+    <label for="data">Data:</label><br>
+    <input type="date" id="data" name="data" required><br>
 
     <label for="kwh">Consumo (kWh):</label><br>
     <input type="number" id="kwh" name="kwh" required><br>
 
-    <label for="observations">Observações:</label><br>
-    <textarea id="observations" name="observations"></textarea><br><br>
+    <label for="observacoes">Observações:</label><br>
+    <textarea id="observacoes" name="observacoes"></textarea><br><br>
 
     <button type="submit">Registrar</button>
 </form>

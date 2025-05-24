@@ -3,11 +3,11 @@ require_once '../db/db.php';
 
 $threshold = 500; // Consumo máximo permitido
 $stmt = $pdo->prepare("
-    SELECT e.name AS equipment_name, ec.date, ec.kwh
-    FROM energy_consumption ec
-    JOIN equipment e ON ec.equipment_id = e.id
+    SELECT e.nome AS equipmento_nome, ec.data, ec.kwh
+    FROM energy_consumo ec
+    JOIN equipmento e ON ec.equipmento_id = e.id
     WHERE ec.kwh > ?
-    ORDER BY ec.date DESC
+    ORDER BY ec.data DESC
 ");
 $stmt->execute([$threshold]);
 $alerts = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -30,8 +30,8 @@ $alerts = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php else: ?>
             <?php foreach ($alerts as $alert): ?>
                 <tr>
-                    <td><?= htmlspecialchars($alert['equipment_name']) ?></td>
-                    <td><?= htmlspecialchars($alert['date']) ?></td>
+                    <td><?= htmlspecialchars($alert['equipmento_nome']) ?></td>
+                    <td><?= htmlspecialchars($alert['data']) ?></td>
                     <td><?= htmlspecialchars($alert['kwh']) ?></td>
                 </tr>
             <?php endforeach; ?>
